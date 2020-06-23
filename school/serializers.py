@@ -1,3 +1,4 @@
+from django_countries.serializers import CountryFieldMixin
 from rest_framework import serializers
 
 from school.models import Student, School
@@ -14,7 +15,7 @@ class SchoolSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class StudentSerializer(serializers.HyperlinkedModelSerializer):
+class StudentSerializer(CountryFieldMixin, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Student
         fields = '__all__'

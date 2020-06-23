@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
+from django_countries.fields import CountryField
 from hashids import Hashids
 
 hashid = Hashids(settings.STUDENT_ID_SALT, min_length=8)
@@ -27,6 +28,9 @@ class Student(models.Model):
     student_id = models.CharField(max_length=20, null=True, unique=True, editable=False)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
+
+    age = models.PositiveSmallIntegerField()
+    nationality = CountryField()
 
     school = models.ForeignKey(School, on_delete=models.CASCADE, related_name='students',
                                validators=[max_students_validator])

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'django_filters',
+    'django_countries',
 
     'school'
 ]
@@ -133,3 +135,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Hashids
 
 STUDENT_ID_SALT = os.getenv('STUDENT_ID_SALT', '')
+
+
+# Django REST Framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
