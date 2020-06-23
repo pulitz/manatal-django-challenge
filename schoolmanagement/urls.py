@@ -15,8 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_nested import routers
+
+from school import views
+
+router = routers.DefaultRouter()
+router.register(r'schools', views.SchoolViewSet)
+router.register(r'students', views.StudentViewSet, basename='students')
+
+schools_router = routers.NestedSimpleRouter(router, r'schools', lookup='school')
+schools_router.register(r'students', views.StudentViewSet, basename='school-students')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    path('', include(router.urls)),
+    path('', include(schools_router.urls))
 ]
