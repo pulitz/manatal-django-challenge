@@ -5,13 +5,14 @@ from school.serializers import StudentSerializer, SchoolSerializer
 
 
 class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
-    def get_queryset(self):
-        filters = {}
+    def filter_queryset(self, queryset):
+        queryset = super().filter_queryset(queryset)
         if 'school_pk' in self.kwargs:
-            filters['school_id'] = self.kwargs['school_pk']
-        return Student.objects.filter(**filters)
+            queryset = queryset.filter(school_id=self.kwargs['school_pk'])
+        return queryset
 
 
 class SchoolViewSet(viewsets.ModelViewSet):

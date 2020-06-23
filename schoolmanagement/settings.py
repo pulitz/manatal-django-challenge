@@ -131,4 +131,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 
 # Hashids
+
 STUDENT_ID_SALT = os.getenv('STUDENT_ID_SALT', '')

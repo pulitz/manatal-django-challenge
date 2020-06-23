@@ -21,7 +21,7 @@ from school import views
 
 router = routers.DefaultRouter()
 router.register(r'schools', views.SchoolViewSet)
-router.register(r'students', views.StudentViewSet, basename='students')
+router.register(r'students', views.StudentViewSet)
 
 schools_router = routers.NestedSimpleRouter(router, r'schools', lookup='school')
 schools_router.register(r'students', views.StudentViewSet, basename='school-students')
